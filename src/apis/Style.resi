@@ -17,8 +17,12 @@ type margin = size
 @inline("auto")
 let auto: margin
 
-type offset
-@obj external offset: (~height: float, ~width: float) => offset = ""
+type offset = {
+  height: float,
+  width: float,
+}
+@deprecated("Directly create record instead") @obj
+external offset: (~height: float, ~width: float) => offset = ""
 
 type angle
 let deg: float => angle

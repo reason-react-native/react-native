@@ -207,9 +207,9 @@ external parallel: (array<Animation.t>, parallelPayload) => Animation.t = "paral
 @module("react-native") @scope("Animated")
 external stagger: (float, array<Animation.t>) => Animation.t = "stagger"
 
-type loopConfig
-
-@obj external loopConfig: (~iterations: int) => loopConfig = ""
+type loopConfig = {iterations?: int, resetBeforeIteration?: bool}
+@deprecated("Directly create record instead") @obj
+external loopConfig: (~iterations: int=?, ~resetBeforeIteration: bool=?) => loopConfig = ""
 
 // multiple externals
 @module("react-native") @scope("Animated")

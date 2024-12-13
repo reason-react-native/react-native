@@ -15,16 +15,20 @@ type appParameters
 
 external asAppParameters: 'a => appParameters = "%identity"
 
-type appConfig
-
-@obj
+type appConfig<'a> = {
+  appKey: string,
+  component?: componentProvider<'a>,
+  run?: appParameters => unit,
+  section?: bool,
+}
+@deprecated("Directly create record instead") @obj
 external appConfig: (
   ~appKey: string,
   ~component: componentProvider<'a>=?,
   ~run: appParameters => unit=?,
   ~section: bool=?,
   unit,
-) => appConfig = ""
+) => appConfig<'a> = ""
 
 type runnable<'a> = {
   "component": Js.Nullable.t<componentProvider<'a>>,
@@ -62,7 +66,7 @@ external registerComponentWithSection: (appKey, componentProvider<'a>, section) 
   "registerComponent"
 
 @module("react-native") @scope("AppRegistry")
-external registerConfig: array<appConfig> => unit = "registerConfig"
+external registerConfig: array<appConfig<'a>> => unit = "registerConfig"
 
 @module("react-native") @scope("AppRegistry")
 external registerRunnable: (appKey, appParameters => unit) => string = "registerRunnable"

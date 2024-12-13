@@ -1,7 +1,8 @@
 include ScrollViewElement
 
-type contentOffset
-@obj external contentOffset: (~x: float, ~y: float) => contentOffset = ""
+type contentOffset = {x: float, y: float}
+@deprecated("Directly create record instead") @obj
+external contentOffset: (~x: float, ~y: float) => contentOffset = ""
 
 type contentInsetAdjustmentBehavior = [
   | #automatic
